@@ -43,7 +43,6 @@ ubuntu@rke-workstation:~$ rke config
 ubuntu@rke-workstation:~$ rke up
 INFO[0000] Running RKE version: v1.3.6                  
 INFO[0000] Initiating Kubernetes cluster                
-INFO[0000] [dialer] Setup tunnel for host [3.104.124.16] 
 ''''''
 INFO[0199] [ingress] ingress controller nginx deployed successfully 
 INFO[0199] [addons] Setting up user addons              
