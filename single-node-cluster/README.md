@@ -1,7 +1,9 @@
 # single node cluster installation
 ## make sure the node user can run docker 
 ```
-sudo usermod -aG docker ubuntu
+ubuntu@rke-single-node:~$ sudo usermod -aG docker ubuntu
+
+# add rke-workstation id_rsa.pub key to rke-single-node  ~/.ssh/authorized_keys
 ```
 ```
 # verify it by run this command from your workstation
