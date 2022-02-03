@@ -59,3 +59,44 @@ ubuntu@rke-workstation:~$ kubectl get node
 NAME           STATUS   ROLES                      AGE   VERSION
 3.104.124.16   Ready    controlplane,etcd,worker   47m   v1.21.8
 ```
+
+
+# install rancher server
+```
+helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
+kubectl create namespace cattle-system
+# If you have installed the CRDs manually instead of with the `--set installCRDs=true` option added to your Helm install command, you should upgrade your CRD resources before upgrading the Helm chart:
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.crds.yaml
+
+# Add the Jetstack Helm repository
+helm repo add jetstack https://charts.jetstack.io
+
+# Update your local Helm chart repository cache
+helm repo update
+
+# Install the cert-manager Helm chart
+helm install cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.5.1
+
+kubectl get pods --namespace cert-manager
+
+
+```
+install rancher
+```
+helm install rancher rancher-latest/rancher \
+  --namespace cattle-system \
+  --set hostname=ec2-3-104-124-16.ap-southeast-2.compute.amazonaws.com \
+  --set replicas=1 \
+  --set bootstrapPassword=admin
+
+#Wait for Rancher to be rolled out:
+ubuntu@rke-workstation:~$ kubectl -n cattle-system rollout status deploy/rancher
+Waiting for deployment "rancher" rollout to finish: 0 of 1 updated replicas are available...
+Waiting for deployment spec update to be observed...
+Waiting for deployment "rancher" rollout to finish: 0 of 1 updated replicas are available...
+deployment "rancher" successfully rolled out
+
+```
