@@ -68,7 +68,7 @@ install rancher
 ```
 helm install rancher rancher-latest/rancher \
   --namespace cattle-system \
-  --set hostname=donny-rke-ha-lb-f8bf750a4ee65238.elb.ap-southeast-2.amazonaws.com \
+  --set hostname=xxxxxxxxxxx.amazonaws.com \
   --set replicas=3 \
   --set bootstrapPassword=admin
 
